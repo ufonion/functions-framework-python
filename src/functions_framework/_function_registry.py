@@ -31,6 +31,7 @@ DEFAULT_SOURCE = os.path.realpath("./main.py")
 
 FUNCTION_SIGNATURE_TYPE = "FUNCTION_SIGNATURE_TYPE"
 FUNC_CONTEXT = "FUNC_CONTEXT"
+FUNC_CONTEXT_V1BETA2 = "FUNC_CONTEXT_V1BETA2"
 HTTP_SIGNATURE_TYPE = "http"
 CLOUDEVENT_SIGNATURE_TYPE = "cloudevent"
 BACKGROUNDEVENT_SIGNATURE_TYPE = "event"
@@ -145,7 +146,7 @@ def get_func_signature_type(func_name: str, signature_type: str) -> str:
 
 def get_openfunction_context(func_context: str) -> FunctionContext:
     """Get openfunction context"""
-    context_str = func_context or os.environ.get(FUNC_CONTEXT)
+    context_str = func_context or os.environ.get(FUNC_CONTEXT_V1BETA2) or os.environ.get(FUNC_CONTEXT)
 
     if context_str:
         context = FunctionContext.from_json(json.loads(context_str))

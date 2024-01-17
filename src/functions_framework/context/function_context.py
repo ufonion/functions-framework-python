@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 from functions_framework.constants import DAPR_BINDING_TYPE, DAPR_PUBSUB_TYPE
-
+import os
 
 class FunctionContext(object):
     """OpenFunction's serving context."""
@@ -55,7 +55,7 @@ class FunctionContext(object):
         pre_hooks = json_dct.get("pre_hooks", [])
         post_hooks = json_dct.get("post_hooks", [])
         tracing = json_dct.get("tracing", {})
-        port = json_dct.get("port", 0)
+        port = json_dct.get("port", int(os.environ.get('PORT')) or 8080)
 
         inputs = None
         if inputs_map:
